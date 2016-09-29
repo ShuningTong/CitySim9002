@@ -11,6 +11,7 @@ import Domain.Validator;
  *
  * @author AsphaltPanthers
  */
+// this is done for purpose, we don't test controller, we test all methods this controller calls
 public class CitySim9002 {
     public static String errorMessage = "Please enter one integer argument, seed";
     
