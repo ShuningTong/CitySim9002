@@ -47,9 +47,4 @@ public class ValidatorTest {
         
         Assert.assertTrue(mockValidator.validateArguments(new String[0]));
     }
-    
-    @Test
-    public void testTest(){
-        
-    }
 }

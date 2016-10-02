@@ -13,11 +13,11 @@ public class Validator {
     public boolean validateArguments(String[] args) {
         return validateNumberOfArguments(args) && validateArgumentType(args);
     }
-    
+    // only one argument
     public boolean validateNumberOfArguments(String[] args) {
         return args.length == 1;
     }
-    
+    // is int type
     public boolean validateArgumentType(String[] args) {
         try {
             Integer.parseInt(args[0]);
