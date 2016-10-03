@@ -11,16 +11,18 @@ import Domain.Validator;
  *
  * @author AsphaltPanthers
  */
-<span class="nc" id="L14">public class CitySim9002 {</span>
-<span class="nc" id="L15">    public static String errorMessage = &quot;Please enter one integer argument, seed&quot;;</span>
+// this is done for purpose, we don't test controller, we test all methods this controller calls
+<span class="nc" id="L15">public class CitySim9002 {</span>
+<span class="nc" id="L16">    public static String errorMessage = &quot;Please enter one integer argument, seed&quot;;</span>
     
     public static int main(String[] args) {
-<span class="nc bnc" id="L18" title="All 2 branches missed.">        if (new Validator().validateArguments(args)) {</span>
-<span class="nc" id="L19">            return 0;</span>
+        // validator is part of code
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        if (new Validator().validateArguments(args)) {</span>
+<span class="nc" id="L21">            return 0;</span>
         }
         else {
-<span class="nc" id="L22">            System.out.println(errorMessage);</span>
-<span class="nc" id="L23">            return -1;</span>
+<span class="nc" id="L24">            System.out.println(errorMessage);</span>
+<span class="nc" id="L25">            return -1;</span>
         }
     }
 }

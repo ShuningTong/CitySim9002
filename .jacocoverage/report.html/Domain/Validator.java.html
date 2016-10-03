@@ -13,11 +13,11 @@ package Domain;
     public boolean validateArguments(String[] args) {
 <span class="nc bnc" id="L14" title="All 4 branches missed.">        return validateNumberOfArguments(args) &amp;&amp; validateArgumentType(args);</span>
     }
-    
+    // only one argument
     public boolean validateNumberOfArguments(String[] args) {
 <span class="fc bfc" id="L18" title="All 2 branches covered.">        return args.length == 1;</span>
     }
-    
+    // is int type
     public boolean validateArgumentType(String[] args) {
         try {
 <span class="fc" id="L23">            Integer.parseInt(args[0]);</span>
