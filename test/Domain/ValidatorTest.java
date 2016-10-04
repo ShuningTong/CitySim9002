@@ -38,13 +38,13 @@ public class ValidatorTest {
     
     // one mock and two shims
     // change control system indicates new things in green
-    @Test
-    public void ifArgumentLengthAndArgumentTypeIsCorrect(){
-        Validator mockValidator = mock(Validator.class);
-        when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
-        when(mockValidator.validateArgumentType(any(String[].class))).thenReturn(true);
-        when(mockValidator.validateArgumentType(any(String[].class))).thenCallRealMethod();
-        
-        Assert.assertTrue(mockValidator.validateArguments(new String[0]));
-    }
+//    @Test
+//    public void ifArgumentLengthAndArgumentTypeIsCorrect(){
+//        Validator mockValidator = mock(Validator.class);
+//        when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
+//        when(mockValidator.validateArgumentType(any(String[].class))).thenReturn(true);
+//        when(mockValidator.validateArgumentType(any(String[].class))).thenCallRealMethod();
+//        
+//        Assert.assertTrue(mockValidator.validateArguments(new String[0]));
+//    }
 }

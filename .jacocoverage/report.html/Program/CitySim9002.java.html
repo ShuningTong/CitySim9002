@@ -6,24 +6,73 @@
 package Program;
 
 import Domain.Validator;
+import java.util.HashMap;
+import java.util.Random;
 
 /**
  *
  * @author AsphaltPanthers
  */
 // this is done for purpose, we don't test controller, we test all methods this controller calls
-<span class="nc" id="L15">public class CitySim9002 {</span>
-<span class="nc" id="L16">    public static String errorMessage = &quot;Please enter one integer argument, seed&quot;;</span>
+public class CitySim9002 {
+    public static final String ERROR_MESSAGE = &quot;Please enter one integer argument, seed&quot;;
+<span class="nc" id="L19">    public static final String[] LOCATIONS = {&quot;Squirrel Hill&quot;, &quot;Downtown&quot;, &quot;The Point&quot;, &quot;Cathedral of Learning&quot;, &quot;Left the City&quot;};</span>
+    public HashMap&lt;String, boolean[]&gt; map;
+<span class="nc" id="L21">    public static final boolean[] STUDENT_LIKES = {true, true, true, false};</span>
+<span class="nc" id="L22">    public static final boolean[] PROFESSOR_LIKES = {true, true, true, true};</span>
+<span class="nc" id="L23">    public static final boolean[] BUSINESS_PERSON_LIKES = {true, true, false, false};</span>
+<span class="nc" id="L24">    public static final boolean[] BLOGGER_LIKES = {false, false, false, false};</span>
     
-    public static int main(String[] args) {
-        // validator is part of code
-<span class="nc bnc" id="L20" title="All 2 branches missed.">        if (new Validator().validateArguments(args)) {</span>
-<span class="nc" id="L21">            return 0;</span>
+<span class="nc" id="L26">    public CitySim9002(){</span>
+<span class="nc" id="L27">        map = new HashMap&lt;String, boolean[]&gt;();</span>
+<span class="nc" id="L28">        map.put(&quot;Student&quot;, STUDENT_LIKES);</span>
+<span class="nc" id="L29">        map.put(&quot;Professor&quot;, PROFESSOR_LIKES);</span>
+<span class="nc" id="L30">        map.put(&quot;Business Person&quot;, BUSINESS_PERSON_LIKES);</span>
+<span class="nc" id="L31">        map.put(&quot;Blogger&quot;, BLOGGER_LIKES);</span>
+<span class="nc" id="L32">    }</span>
+    
+    public void tourist(Visitor person, Random r1){
+<span class="nc" id="L35">        int placeNum = r1.nextInt(5);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        while(placeNum == 4){</span>
+<span class="nc" id="L37">            placeNum = r1.nextInt(5);</span>
         }
-        else {
-<span class="nc" id="L24">            System.out.println(errorMessage);</span>
-<span class="nc" id="L25">            return -1;</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        while(placeNum != 4){</span>
+<span class="nc" id="L40">            System.out.println(&quot;Visitor &quot; + person.getNum() + &quot; is going to &quot; + LOCATIONS[placeNum] + &quot;!&quot;);</span>
+<span class="nc" id="L41">            System.out.println(likeOrNot(person, placeNum));</span>
+<span class="nc" id="L42">            placeNum = r1.nextInt(5);</span>
+        }
+<span class="nc" id="L44">        System.out.println(&quot;Visitor &quot; + person.getNum() + &quot; has &quot; + LOCATIONS[placeNum] + &quot;!&quot;);</span>
+<span class="nc" id="L45">    }</span>
+    
+    public String likeOrNot(Visitor person, int placeNum){
+<span class="nc" id="L48">        boolean likes = map.get(person.getIdentity())[placeNum];</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (likes){</span>
+<span class="nc" id="L50">            return &quot;Visitor &quot; + person.getNum() + &quot; did like &quot; + LOCATIONS[placeNum] + &quot;.&quot;;</span>
+        }else{
+<span class="nc" id="L52">            return &quot;Visitor &quot; + person.getNum() + &quot; did not like &quot; + LOCATIONS[placeNum] + &quot;.&quot;;</span>
         }
     }
+    
+    public static void main(String[] args) {
+<span class="nc" id="L57">        CitySim9002 sim = new CitySim9002();</span>
+        
+        // validator is part of code
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (new Validator().validateArguments(args)) {</span>
+<span class="nc" id="L61">            System.out.println(&quot;Welcome to CitySim! Your seed is &quot; + args[0] + &quot;.&quot;);</span>
+<span class="nc" id="L62">            Random r1 = new Random(Long.parseLong(args[0]));</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">            for (int i = 0; i &lt; 5; i++){</span>
+<span class="nc" id="L64">                Visitor person = new Visitor();</span>
+<span class="nc" id="L65">                person.setNum(i);</span>
+<span class="nc" id="L66">                person.setIdentity(r1);</span>
+<span class="nc" id="L67">                System.out.println(&quot;Visitor &quot; + person.getNum() + &quot; is a &quot; + person.getIdentity());</span>
+<span class="nc" id="L68">                sim.tourist(person, r1);</span>
+<span class="nc" id="L69">                System.out.println(&quot;***&quot;);</span>
+            }
+<span class="nc" id="L71">        }</span>
+        else {
+<span class="nc" id="L73">            System.out.println(ERROR_MESSAGE);  </span>
+<span class="nc" id="L74">            System.exit(0);</span>
+        }
+<span class="nc" id="L76">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

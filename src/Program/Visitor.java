@@ -4,11 +4,31 @@
  * and open the template in the editor.
  */
 package Program;
-
+import java.util.Random;
 /**
  *
  * @author shuning
  */
 public class Visitor {
+    int num = 0;
+    String identity;
+    String[] title = {"Student", "Professor", "Business Person", "Blogger"};
+
+    public int getNum() {
+        return num;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public void setIdentity(Random r1) {
+        this.identity = title[r1.nextInt(4)];
+    }
+    
     
 }
