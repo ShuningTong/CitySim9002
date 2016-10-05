@@ -31,17 +31,19 @@ public class CitySim9002 {
         map.put("Blogger", BLOGGER_LIKES);
     }
     
-    public void tourist(Visitor person, Random r1){
+    public String tourist(Visitor person, Random r1){
+        StringBuilder sb = new StringBuilder();
         int placeNum = r1.nextInt(5);
         while(placeNum == 4){
             placeNum = r1.nextInt(5);
         }
         while(placeNum != 4){
-            System.out.println("Visitor " + person.getNum() + " is going to " + LOCATIONS[placeNum] + "!");
-            System.out.println(likeOrNot(person, placeNum));
+            sb.append("Visitor " + person.getNum() + " is going to " + LOCATIONS[placeNum] + "!");
+            sb.append(likeOrNot(person, placeNum));
             placeNum = r1.nextInt(5);
         }
-        System.out.println("Visitor " + person.getNum() + " has " + LOCATIONS[placeNum] + "!");
+        sb.append("Visitor " + person.getNum() + " has " + LOCATIONS[placeNum] + "!");
+        return sb.toString();
     }
     
     public String likeOrNot(Visitor person, int placeNum){
@@ -55,8 +57,7 @@ public class CitySim9002 {
     
     public static void main(String[] args) {
         CitySim9002 sim = new CitySim9002();
-        
-        // validator is part of code
+
         if (new Validator().validateArguments(args)) {
             System.out.println("Welcome to CitySim! Your seed is " + args[0] + ".");
             Random r1 = new Random(Long.parseLong(args[0]));
@@ -65,7 +66,8 @@ public class CitySim9002 {
                 person.setNum(i);
                 person.setIdentity(r1);
                 System.out.println("Visitor " + person.getNum() + " is a " + person.getIdentity());
-                sim.tourist(person, r1);
+                String tour = sim.tourist(person, r1);
+                System.out.println(tour);
                 System.out.println("***");
             }
         }

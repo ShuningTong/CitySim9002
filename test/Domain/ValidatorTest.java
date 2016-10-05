@@ -36,15 +36,36 @@ public class ValidatorTest {
         Assert.assertFalse(new Validator().validateArgumentType(new String[] { "test" }));
     }
     
-    // one mock and two shims
-    // change control system indicates new things in green
-//    @Test
-//    public void ifArgumentLengthAndArgumentTypeIsCorrect(){
-//        Validator mockValidator = mock(Validator.class);
-//        when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
-//        when(mockValidator.validateArgumentType(any(String[].class))).thenReturn(true);
-//        when(mockValidator.validateArgumentType(any(String[].class))).thenCallRealMethod();
-//        
-//        Assert.assertTrue(mockValidator.validateArguments(new String[0]));
-//    }
+    @Test
+    public void ifArgumentLengthAndArgumentTypeAreCorrect(){
+        Validator mockValidator = mock(Validator.class);
+        when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
+        when(mockValidator.validateArgumentType(any(String[].class))).thenReturn(true);
+        
+        when(mockValidator.validateArguments(any(String[].class))).thenCallRealMethod();
+        
+        Assert.assertTrue(mockValidator.validateArguments(new String[] { "0" }));
+    }
+    
+    @Test
+    public void ifArgumentLengthOrArgumentTypeIsCorrect(){
+        Validator mockValidator = mock(Validator.class);
+        when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(true);
+        when(mockValidator.validateArgumentType(any(String[].class))).thenReturn(false);
+        
+        when(mockValidator.validateArguments(any(String[].class))).thenCallRealMethod();
+        
+        Assert.assertFalse(mockValidator.validateArguments(new String[] { "0" }));
+    }
+    
+    @Test
+    public void ifArgumentLengthAndArgumentTypeAreWrong(){
+        Validator mockValidator = mock(Validator.class);
+        when(mockValidator.validateNumberOfArguments(any(String[].class))).thenReturn(false);
+        when(mockValidator.validateArgumentType(any(String[].class))).thenReturn(false);
+        
+        when(mockValidator.validateArguments(any(String[].class))).thenCallRealMethod();
+        
+        Assert.assertFalse(mockValidator.validateArguments(new String[] { "0" }));
+    }
 }
