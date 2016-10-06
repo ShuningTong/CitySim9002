@@ -11,9 +11,9 @@ import java.util.Random;
 
 /**
  *
- * @author AsphaltPanthers
+ * @author shuning
  */
-// this is done for purpose, we don't test controller, we test all methods this controller calls
+
 public class CitySim9002 {
     public static final String ERROR_MESSAGE = &quot;Please enter one integer argument, seed&quot;;
 <span class="fc" id="L19">    public static final String[] LOCATIONS = {&quot;Squirrel Hill&quot;, &quot;Downtown&quot;, &quot;The Point&quot;, &quot;Cathedral of Learning&quot;, &quot;Left the City&quot;};</span>
@@ -31,50 +31,51 @@ public class CitySim9002 {
 <span class="fc" id="L31">        this.map.put(&quot;Blogger&quot;, BLOGGER_LIKES);</span>
 <span class="fc" id="L32">    }</span>
     
+    // dependency injection: put dependency as parameter, instead of creating it inside the method.
     public String tourist(Visitor person, Random r1){
-<span class="fc" id="L35">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L36">        int placeNum = r1.nextInt(5);</span>
-<span class="fc bfc" id="L37" title="All 2 branches covered.">        while(placeNum == 4){</span>
-<span class="fc" id="L38">            placeNum = r1.nextInt(5);</span>
+<span class="fc" id="L36">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L37">        int placeNum = r1.nextInt(5);</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        while(placeNum == 4){</span>
+<span class="fc" id="L39">            placeNum = r1.nextInt(5);</span>
         }
-<span class="fc bfc" id="L40" title="All 2 branches covered.">        while(placeNum != 4){</span>
-<span class="fc" id="L41">            sb.append(&quot;Visitor &quot; + person.getNum() + &quot; is going to &quot; + LOCATIONS[placeNum] + &quot;!\n&quot;);</span>
-<span class="fc bfc" id="L42" title="All 2 branches covered.">            if (this.likes(person, placeNum)){</span>
-<span class="fc" id="L43">                sb.append(&quot;Visitor &quot; + person.getNum() + &quot; did like &quot; + LOCATIONS[placeNum] + &quot;.\n&quot;);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        while(placeNum != 4){</span>
+<span class="fc" id="L42">            sb.append(&quot;Visitor &quot; + person.getNum() + &quot; is going to &quot; + LOCATIONS[placeNum] + &quot;!\n&quot;);</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            if (this.likes(person, placeNum)){</span>
+<span class="fc" id="L44">                sb.append(&quot;Visitor &quot; + person.getNum() + &quot; did like &quot; + LOCATIONS[placeNum] + &quot;.\n&quot;);</span>
             } else {
-<span class="fc" id="L45">                sb.append(&quot;Visitor &quot; + person.getNum() + &quot; did not like &quot; + LOCATIONS[placeNum] + &quot;.\n&quot;);</span>
+<span class="fc" id="L46">                sb.append(&quot;Visitor &quot; + person.getNum() + &quot; did not like &quot; + LOCATIONS[placeNum] + &quot;.\n&quot;);</span>
             }
-<span class="fc" id="L47">            placeNum = r1.nextInt(5);</span>
+<span class="fc" id="L48">            placeNum = r1.nextInt(5);</span>
         }
-<span class="fc" id="L49">        sb.append(&quot;Visitor &quot; + person.getNum() + &quot; has &quot; + LOCATIONS[placeNum] + &quot;!\n&quot;);</span>
-<span class="fc" id="L50">        return sb.toString();</span>
+<span class="fc" id="L50">        sb.append(&quot;Visitor &quot; + person.getNum() + &quot; has &quot; + LOCATIONS[placeNum] + &quot;!\n&quot;);</span>
+<span class="fc" id="L51">        return sb.toString();</span>
     }
     
     public boolean likes(Visitor person, int placeNum){
-<span class="fc" id="L54">        return this.map.get(person.getIdentity())[placeNum];</span>
+<span class="fc" id="L55">        return this.map.get(person.getIdentity())[placeNum];</span>
     }
     
     public static void main(String[] args) {
-<span class="nc" id="L58">        CitySim9002 sim = new CitySim9002();</span>
+<span class="nc" id="L59">        CitySim9002 sim = new CitySim9002();</span>
 
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (new Validator().validateArguments(args)) {</span>
-<span class="nc" id="L61">            System.out.println(&quot;Welcome to CitySim! Your seed is &quot; + args[0] + &quot;.&quot;);</span>
-<span class="nc" id="L62">            Random r1 = new Random(Long.parseLong(args[0]));</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">            for (int i = 0; i &lt; 5; i++){</span>
-<span class="nc" id="L64">                Visitor person = new Visitor();</span>
-<span class="nc" id="L65">                person.setNum(i);</span>
-<span class="nc" id="L66">                person.setIdentity(person.setIdentityHelper(r1));</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (new Validator().validateArguments(args)) {</span>
+<span class="nc" id="L62">            System.out.println(&quot;Welcome to CitySim! Your seed is &quot; + args[0] + &quot;.&quot;);</span>
+<span class="nc" id="L63">            Random r1 = new Random(Long.parseLong(args[0]));</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            for (int i = 0; i &lt; 5; i++){</span>
+<span class="nc" id="L65">                Visitor person = new Visitor();</span>
+<span class="nc" id="L66">                person.setNum(i + 1);</span>
+<span class="nc" id="L67">                person.setIdentity(person.setIdentityHelper(r1));</span>
                 
-<span class="nc" id="L68">                System.out.println(&quot;Visitor &quot; + person.getNum() + &quot; is a &quot; + person.getIdentity() + &quot;\n&quot;);</span>
-<span class="nc" id="L69">                String tour = sim.tourist(person, r1);</span>
-<span class="nc" id="L70">                System.out.println(tour);</span>
-<span class="nc" id="L71">                System.out.println(&quot;***&quot;);</span>
+<span class="nc" id="L69">                System.out.println(&quot;Visitor &quot; + person.getNum() + &quot; is a &quot; + person.getIdentity() + &quot;\n&quot;);</span>
+<span class="nc" id="L70">                String tour = sim.tourist(person, r1);</span>
+<span class="nc" id="L71">                System.out.println(tour);</span>
+<span class="nc" id="L72">                System.out.println(&quot;***&quot;);</span>
             }
-<span class="nc" id="L73">        }</span>
+<span class="nc" id="L74">        }</span>
         else {
-<span class="nc" id="L75">            System.out.println(ERROR_MESSAGE);  </span>
-<span class="nc" id="L76">            System.exit(0);</span>
+<span class="nc" id="L76">            System.out.println(ERROR_MESSAGE);  </span>
+<span class="nc" id="L77">            System.exit(0);</span>
         }
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L79">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
