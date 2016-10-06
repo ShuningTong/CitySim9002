@@ -25,10 +25,14 @@ public class Visitor {
     public void setNum(int num) {
         this.num = num;
     }
-
-    public void setIdentity(Random r1) {
-        this.identity = title[r1.nextInt(4)];
+    
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }  
+    
+    public String setIdentityHelper(Random r1){
+        return title[r1.nextInt(4)];
     }
-    
-    
+
+ 
 }

@@ -24,11 +24,11 @@ public class CitySim9002 {
     public static final boolean[] BLOGGER_LIKES = {false, false, false, false};
     
     public CitySim9002(){
-        map = new HashMap<String, boolean[]>();
-        map.put("Student", STUDENT_LIKES);
-        map.put("Professor", PROFESSOR_LIKES);
-        map.put("Business Person", BUSINESS_PERSON_LIKES);
-        map.put("Blogger", BLOGGER_LIKES);
+        this.map = new HashMap<String, boolean[]>();
+        this.map.put("Student", STUDENT_LIKES);
+        this.map.put("Professor", PROFESSOR_LIKES);
+        this.map.put("Business Person", BUSINESS_PERSON_LIKES);
+        this.map.put("Blogger", BLOGGER_LIKES);
     }
     
     public String tourist(Visitor person, Random r1){
@@ -38,21 +38,20 @@ public class CitySim9002 {
             placeNum = r1.nextInt(5);
         }
         while(placeNum != 4){
-            sb.append("Visitor " + person.getNum() + " is going to " + LOCATIONS[placeNum] + "!");
-            sb.append(likeOrNot(person, placeNum));
+            sb.append("Visitor " + person.getNum() + " is going to " + LOCATIONS[placeNum] + "!\n");
+            if (this.likes(person, placeNum)){
+                sb.append("Visitor " + person.getNum() + " did like " + LOCATIONS[placeNum] + ".\n");
+            } else {
+                sb.append("Visitor " + person.getNum() + " did not like " + LOCATIONS[placeNum] + ".\n");
+            }
             placeNum = r1.nextInt(5);
         }
-        sb.append("Visitor " + person.getNum() + " has " + LOCATIONS[placeNum] + "!");
+        sb.append("Visitor " + person.getNum() + " has " + LOCATIONS[placeNum] + "!\n");
         return sb.toString();
     }
     
-    public String likeOrNot(Visitor person, int placeNum){
-        boolean likes = map.get(person.getIdentity())[placeNum];
-        if (likes){
-            return "Visitor " + person.getNum() + " did like " + LOCATIONS[placeNum] + ".";
-        }else{
-            return "Visitor " + person.getNum() + " did not like " + LOCATIONS[placeNum] + ".";
-        }
+    public boolean likes(Visitor person, int placeNum){
+        return this.map.get(person.getIdentity())[placeNum];
     }
     
     public static void main(String[] args) {
@@ -64,8 +63,9 @@ public class CitySim9002 {
             for (int i = 0; i < 5; i++){
                 Visitor person = new Visitor();
                 person.setNum(i);
-                person.setIdentity(r1);
-                System.out.println("Visitor " + person.getNum() + " is a " + person.getIdentity());
+                person.setIdentity(person.setIdentityHelper(r1));
+                
+                System.out.println("Visitor " + person.getNum() + " is a " + person.getIdentity() + "\n");
                 String tour = sim.tourist(person, r1);
                 System.out.println(tour);
                 System.out.println("***");
