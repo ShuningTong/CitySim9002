@@ -11,9 +11,9 @@ import java.util.Random;
 
 /**
  *
- * @author AsphaltPanthers
+ * @author shuning
  */
-// this is done for purpose, we don't test controller, we test all methods this controller calls
+
 public class CitySim9002 {
     public static final String ERROR_MESSAGE = "Please enter one integer argument, seed";
     public static final String[] LOCATIONS = {"Squirrel Hill", "Downtown", "The Point", "Cathedral of Learning", "Left the City"};
@@ -31,6 +31,7 @@ public class CitySim9002 {
         this.map.put("Blogger", BLOGGER_LIKES);
     }
     
+    // dependency injection: put dependency as parameter, instead of creating it inside the method.
     public String tourist(Visitor person, Random r1){
         StringBuilder sb = new StringBuilder();
         int placeNum = r1.nextInt(5);
@@ -62,7 +63,7 @@ public class CitySim9002 {
             Random r1 = new Random(Long.parseLong(args[0]));
             for (int i = 0; i < 5; i++){
                 Visitor person = new Visitor();
-                person.setNum(i);
+                person.setNum(i + 1);
                 person.setIdentity(person.setIdentityHelper(r1));
                 
                 System.out.println("Visitor " + person.getNum() + " is a " + person.getIdentity() + "\n");
